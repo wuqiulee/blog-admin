@@ -1,0 +1,56 @@
+.wrapper{
+  display: flex;
+  justify-content: space-between;
+  user-select: none;
+  transition: all .2s;
+
+  &>div{
+    flex: 1;
+    background-color: #fff;
+  }
+
+  &>div:hover{
+    box-shadow: 0 0 10px rgb(0 0 0 / 40%);
+  }
+
+  .userInfo{
+    flex: 2;
+    padding: 30px;
+
+    div{
+      font-size: 36px;
+      font-weight: bold;
+      line-height: 100%;
+
+      span{
+        color: #1890ff;
+      }
+
+      i{
+        font-size: 16px;
+        vertical-align: middle;
+        font-weight: normal;
+      }
+    }
+    p{
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  }
+  .address{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 20px;
+    .date{
+      font-size: 36px;
+      line-height: 100%;
+      font-weight: bold;
+    }
+    .ip{
+      margin-top: 10px;
+      font-size: 16px;
+    }
+  }
+}

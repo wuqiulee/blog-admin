@@ -1,0 +1,30 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  border-bottom: 1px solid #eee;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 8%);
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  
+  .logout{
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.2s;
+  }
+  .logout:hover{
+    background-color: rgb(231, 231, 231);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #000;
+  }
+}
+.content{
+  padding: 20px;
+  margin-left: 200px;
+  margin-top: 64px;
+  min-height: calc(100vh - 64px);
+}

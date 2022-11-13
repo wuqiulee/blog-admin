@@ -1,0 +1,26 @@
+.continer{
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: url('../../assets/img/login_bg.jpg') no-repeat fixed;
+  background-size: cover;
+}
+
+.wrapper{
+  width: 350px;
+  height: 450px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 40%);
+  padding: 50px 30px 30px;
+  h3{
+    font-weight: bold;
+    font-size: 20px;
+  }
+  p{
+    font-weight: 600;
+    margin: 20px 0 40px;
+  }
+}
