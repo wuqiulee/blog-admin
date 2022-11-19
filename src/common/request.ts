@@ -1,7 +1,9 @@
 /* eslint-disable no-shadow */
 import axios from 'axios';
+import { get } from 'loadsh';
 import { message } from 'antd';
 import { VISITOR_TEXT } from '@/common/constants/user';
+import { ErrorCode } from '@/common/constants/errCode';
 
 const request = (config: any) => {
   const instance = axios.create({
@@ -28,14 +30,19 @@ const request = (config: any) => {
     },
     (error) => {
       console.log('error===', error.response);
-      const { response } = error;
-      if (response.status === 401) {
+      const status = get(error, 'response.status', 400);
+      const errCode = get(error, 'response.data.code', -1);
+      if (status === 401) {
         window.location.href = '/login';
         message.error('token过期，请重新登录');
+        return;
       }
-      if (response.status === 403) {
+      if (status === 403) {
         message.error(VISITOR_TEXT);
+        return;
       }
+      // 统一处理业务接口error提示
+      message.error(ErrorCode[errCode] || '接口调用失败');
     }
   );
 

@@ -15,7 +15,7 @@ const Login: React.FC = () => {
   const onFinish = async (values: LoginType) => {
     try {
       const res: any = await userLogin(values);
-      if (res.code === 200) {
+      if (res.code === 0) {
         const { token, user, role } = res.data;
         console.log(res.data, 'res.data');
         // 保存登录状态

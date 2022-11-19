@@ -4,4 +4,8 @@ declare module '*.scss' {
 }
 
 declare module 'jinrishici';
+
+declare module 'loadsh';
+
+declare module 'react-emotor';
 // declare module '@*';
