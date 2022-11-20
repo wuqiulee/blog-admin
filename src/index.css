@@ -75,3 +75,18 @@ img {
   border: none;
   vertical-align: middle;
 }
+
+.ant-table-thead .ant-table-cell {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.ant-table-tbody .ant-table-cell {
+  text-align: center;
+}
+
+.ant-modal-title {
+  font-size: 18px;
+  font-weight: 700;
+}

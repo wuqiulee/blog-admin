@@ -10,3 +10,13 @@ export interface CategoryType {
 export interface PublishSayType {
   content: string;
 }
+
+export interface GetSayType {
+  pageNum: number;
+  pageSize: number;
+}
+
+export interface UpdateshSayType {
+  content: string;
+  id: number;
+}

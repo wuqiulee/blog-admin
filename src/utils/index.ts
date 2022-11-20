@@ -4,7 +4,8 @@ import { TimeInfoType } from '@/interface/home';
 /**
  * 检测是否已经登录
  */
-export const checkLogin = () => localStorage.getItem('token');
+export const checkLogin = () =>
+  localStorage.getItem('token') || sessionStorage.getItem('isLogin') === 'true';
 
 /**
  * @description 根据时间返回对应的描述

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, Popconfirm, notification } from 'antd';
 import moment from 'moment';
@@ -10,6 +10,7 @@ import Styles from './index.module.scss';
 import { renderMenu, formatSelectKey } from '@/utils/renderMenu';
 import routes from '@/router';
 import { getJrscApiAction } from '@/store/verse/actionCreators';
+import { checkLogin } from '@/utils';
 
 const { Header, Footer, Sider, Content } = Layout;
 const Index: React.FC = () => {
@@ -30,6 +31,7 @@ const Index: React.FC = () => {
   const logout = () => {
     // 清空本地存储
     localStorage.clear();
+    sessionStorage.clear();
     // 跳转到登录页
     navigate('/login');
     notification.success({
@@ -38,6 +40,12 @@ const Index: React.FC = () => {
       placement: 'topRight',
     });
   };
+
+  useEffect(() => {
+    if (!checkLogin()) {
+      navigate('/login');
+    }
+  }, []);
 
   useEffect(() => {
     loadJrscApi((res: any) => {
@@ -85,7 +93,6 @@ const Index: React.FC = () => {
           <Menu
             mode="inline"
             items={renderMenu(routes[2].children!)}
-            // defaultSelectedKeys={[pathname]}
             selectedKeys={selectedKeys}
             style={{ height: '100%', boxShadow: '0 2px 5px 0 rgb(0 0 0 / 8%)' }}
             onClick={MenuClick}

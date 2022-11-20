@@ -2,7 +2,7 @@ import { SET_USER_INFO } from './constants';
 import { VISITOR_NAME } from '@/common/constants/user';
 
 // eslint-disable-next-line no-shadow
-enum RoleEnum {
+export enum RoleEnum {
   ADMIN = 0,
   VISITOR = 1,
 }

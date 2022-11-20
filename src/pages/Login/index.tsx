@@ -7,6 +7,8 @@ import Styles from './Login.module.scss';
 import { userLogin } from '@/api/user';
 import { LoginType } from '@/interface/api';
 import { setUserInfoAction } from '@/store/user/actionCreators';
+import { RoleEnum } from '@/store/user/reducer';
+import { VISITOR_NAME } from '@/common/constants/user';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -15,9 +17,8 @@ const Login: React.FC = () => {
   const onFinish = async (values: LoginType) => {
     try {
       const res: any = await userLogin(values);
-      if (res.code === 0) {
+      if (res?.code === 0) {
         const { token, user, role } = res.data;
-        console.log(res.data, 'res.data');
         // 保存登录状态
         localStorage.setItem('token', token);
         // 用户信息存储全局store
@@ -40,6 +41,24 @@ const Login: React.FC = () => {
       console.error(err, '登录失败');
     }
   };
+
+  // 游客登录
+  const visitorLogin = () => {
+    sessionStorage.setItem('isLogin', 'true');
+    dispatch(
+      setUserInfoAction({
+        user: VISITOR_NAME,
+        role: RoleEnum.VISITOR,
+      })
+    );
+    navigate('/home');
+    notification.success({
+      message: '登录成功',
+      description: '欢迎进入博客后台管理系统！',
+      placement: 'topRight',
+    });
+  };
+
   return (
     <div className={Styles.continer}>
       <div className={Styles.wrapper}>
@@ -59,7 +78,9 @@ const Login: React.FC = () => {
             <Input.Password size="large" placeholder=" 请输入密码" prefix={<LockOutlined />} />
           </Form.Item>
           <Space size={70} style={{ marginTop: 20 }}>
-            <Button type="primary">游客</Button>
+            <Button type="primary" onClick={visitorLogin}>
+              游客
+            </Button>
             <Button type="primary" htmlType="submit">
               登录
             </Button>
