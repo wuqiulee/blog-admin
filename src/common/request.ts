@@ -25,18 +25,18 @@ const request = (config: any) => {
   // 响应拦截
   instance.interceptors.response.use(
     (res) => {
-      console.log('res-------', res);
+      // console.log('res-------', res);
       return res.data ? res.data : res;
     },
     (error) => {
       console.log('error===', error.response);
       const status = get(error, 'response.status', 400);
       const errCode = get(error, 'response.data.code', -1);
-      if (status === 401) {
-        window.location.href = '/login';
-        message.error('token过期，请重新登录');
-        return;
-      }
+      // if (status === 401) {
+      //   window.location.href = '/login';
+      //   message.error('token过期，请重新登录');
+      //   return;
+      // }
       if (status === 403) {
         message.error(VISITOR_TEXT);
         return;

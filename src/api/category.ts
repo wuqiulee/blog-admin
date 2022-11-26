@@ -11,9 +11,8 @@ export const createCategory = async (data: CategoryType) => {
 };
 
 // 获取分类列表
-export const getCategoryList: any = async (params: any) => {
+export const getCategoryList: any = async () => {
   return request({
     url: '/category/List',
-    params,
   });
 };

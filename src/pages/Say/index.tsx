@@ -26,10 +26,7 @@ const Say: React.FC = () => {
   // 获取说说列表数据
   const getDataSource = async () => {
     try {
-      const res: any = await getSayList({
-        pageNum: 1,
-        pageSize: 10,
-      });
+      const res: any = await getSayList();
       const { code, data } = res;
       if (code === 0) {
         setDataSource(data.result);

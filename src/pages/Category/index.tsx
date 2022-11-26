@@ -16,18 +16,25 @@ const Category: React.FC = () => {
   };
 
   const getDataSource = async () => {
-    const res = await getCategoryList({ pageNum: 1, pageSize: 10 });
-    setDataSource(res.data.result);
+    const res = await getCategoryList();
+    const { code, data } = res;
+    if (code === 0) {
+      setDataSource(data?.result);
+    }
   };
 
   const onCreate = useCallback(async (values: { name: string }) => {
-    const res = await createCategory(values);
-    setIsModalOpen(false);
-    getDataSource();
+    const res: any = await createCategory(values);
+    if (res.code === 0) {
+      setIsModalOpen(false);
+      getDataSource();
+    }
   }, []);
+
   const onCancel = useCallback(() => {
     setIsModalOpen(false);
   }, []);
+
   useEffect(() => {
     getDataSource();
   }, []);
@@ -41,7 +48,7 @@ const Category: React.FC = () => {
   }
   const columns: ColumnsType<DataType> = [
     {
-      title: '标签名称',
+      title: '分类名称',
       dataIndex: 'name',
       key: 'name',
       render: (text) => <a>{text}</a>,

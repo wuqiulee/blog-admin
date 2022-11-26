@@ -1,5 +1,5 @@
 import request from '@/common/request';
-import { PublishSayType, GetSayType, UpdateshSayType } from '@/interface/api';
+import { PublishSayType, UpdateshSayType } from '@/interface/api';
 
 // 发表说说
 export const publishSay = async (data: PublishSayType) => {
@@ -11,10 +11,9 @@ export const publishSay = async (data: PublishSayType) => {
 };
 
 // 获取说说列表
-export const getSayList = async (params: GetSayType) => {
+export const getSayList = async () => {
   return request({
     url: '/say/list',
-    params,
   });
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Form, Input } from 'antd';
+import useVerifyAuth from '@/hooks/useVerifyAuth';
 
 interface Values {
   name: string;
@@ -13,6 +14,7 @@ interface Iprops {
 }
 
 const CategoryModal: React.FC<Iprops> = (props) => {
+  const verifyAuth = useVerifyAuth();
   const { title, open, onCreate, onCancel } = props;
   const [form] = Form.useForm();
 
@@ -20,8 +22,10 @@ const CategoryModal: React.FC<Iprops> = (props) => {
     form
       .validateFields()
       .then((values) => {
-        form.resetFields();
-        onCreate(values);
+        verifyAuth(() => {
+          onCreate(values);
+          form.resetFields();
+        });
       })
       .catch((err) => {
         console.error(err);
