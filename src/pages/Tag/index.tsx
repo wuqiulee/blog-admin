@@ -1,14 +1,23 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Card, Button, Table, Tag, Space } from 'antd';
+import { Card, Button, Table, Tag, Space, Form, message, Popconfirm } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import moment from 'moment';
 import CategoryModal from '@/components/Modal';
 import Styles from './index.module.scss';
-import { createTag, getTagList } from '@/api/tag';
+import { createTag, getTagList, updateTag, deleteTag } from '@/api/tag';
+import { DataSourceType } from '@/interface/tag';
+import useVerifyAuth from '@/hooks/useVerifyAuth';
 
 const TagCmp: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [dataSource, setDataSource] = useState([]);
+  const [dataSource, setDataSource] = useState<DataSourceType[]>([]);
+  // 修改还是添加
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  // 修改的标签id
+  const [tagId, setTagId] = useState<number>(0);
+  const verifyAuth = useVerifyAuth();
+
+  const [form] = Form.useForm();
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -21,30 +30,48 @@ const TagCmp: React.FC = () => {
     }
   };
 
-  const onCreate = useCallback(async (values: { name: string }) => {
-    const res: any = await createTag(values);
-    if (res.code === 0) {
-      setIsModalOpen(false);
-      getDataSource();
-    }
-  }, []);
+  const onCreate = useCallback(
+    async (values: { name: string }) => {
+      const res: any = isEdit
+        ? await updateTag({ id: tagId, name: values.name })
+        : await createTag(values);
+      if (res.code === 0) {
+        setIsModalOpen(false);
+        getDataSource();
+        message.success(`${isEdit ? '修改' : '创建'}成功`);
+      }
+    },
+    [isEdit]
+  );
 
   const onCancel = useCallback(() => {
     setIsModalOpen(false);
   }, []);
 
+  // 修改标签
+  const editTag = (id: number, name: string) => {
+    setIsEdit(true);
+    setTagId(id);
+    form.setFieldsValue({ name });
+    showModal();
+  };
+
+  // 删除标签
+  const delTag = (id: number) => {
+    verifyAuth(async () => {
+      const res: any = await deleteTag({ id });
+      if (res?.code === 0) {
+        getDataSource();
+        message.success('标签删除成功');
+      }
+    });
+  };
+
   useEffect(() => {
     getDataSource();
   }, []);
 
-  interface DataType {
-    key: string;
-    name: string;
-    age: number;
-    address: string;
-    tags: string[];
-  }
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<DataSourceType> = [
     {
       title: '标签名称',
       dataIndex: 'name',
@@ -67,8 +94,20 @@ const TagCmp: React.FC = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <Button type="primary">修改</Button>
-          <Button type="primary">删除</Button>
+          <Button type="primary" onClick={() => editTag(record.id, record.name)}>
+            修改
+          </Button>
+          <Popconfirm
+            title="确定要删除该标签吗?"
+            placement="topRight"
+            onConfirm={() => delTag(record.id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button type="primary" danger>
+              删除
+            </Button>
+          </Popconfirm>
         </Space>
       ),
     },
@@ -84,7 +123,14 @@ const TagCmp: React.FC = () => {
       }
     >
       <Table columns={columns} dataSource={dataSource} bordered />
-      <CategoryModal title="标签" open={isModalOpen} onCreate={onCreate} onCancel={onCancel} />
+      <CategoryModal
+        title="标签"
+        open={isModalOpen}
+        onCreate={onCreate}
+        onCancel={onCancel}
+        isEdit={isEdit}
+        form={form}
+      />
     </Card>
   );
 };

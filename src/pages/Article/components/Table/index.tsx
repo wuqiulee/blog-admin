@@ -16,7 +16,7 @@ const TableComp: React.FC<Iprops> = ({ dataSource, removeArticle }) => {
   const verifyAuth = useVerifyAuth();
   const navigate = useNavigate();
   const editArticle = (id: number) => {
-    navigate(`/article/create?id=${id}`);
+    verifyAuth(() => navigate(`/article/create?id=${id}`));
   };
 
   const onConfirm = (id: number) => {

@@ -1,5 +1,5 @@
 import request from '@/common/request';
-import { CategoryType } from '@/interface/api';
+import { CategoryType, UpdateCategoryType } from '@/interface/api';
 
 // 创建分类
 export const createCategory = async (data: CategoryType) => {
@@ -14,5 +14,23 @@ export const createCategory = async (data: CategoryType) => {
 export const getCategoryList: any = async () => {
   return request({
     url: '/category/List',
+  });
+};
+
+// 更新分类
+export const updateCategory = async (data: UpdateCategoryType) => {
+  return request({
+    url: '/category/update',
+    method: 'POST',
+    data,
+  });
+};
+
+// 删除分类
+export const deleteCategory = async (data: { id: number }) => {
+  return request({
+    url: '/category/delete',
+    method: 'POST',
+    data,
   });
 };

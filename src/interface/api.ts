@@ -7,9 +7,20 @@ export interface CategoryType {
   name: string;
 }
 
+export interface UpdateCategoryType {
+  id: number;
+  name: string;
+}
+
 export interface TagyType {
   name: string;
 }
+
+export interface UpdateTagType {
+  id: number;
+  name: string;
+}
+
 export interface PublishSayType {
   content: string;
 }

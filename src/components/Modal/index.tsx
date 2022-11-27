@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal, Form, Input } from 'antd';
 import useVerifyAuth from '@/hooks/useVerifyAuth';
 
@@ -11,23 +11,24 @@ interface Iprops {
   open: boolean;
   onCreate: (values: Values) => void;
   onCancel: () => void;
+  isEdit: boolean;
+  form: any;
 }
 
 const CategoryModal: React.FC<Iprops> = (props) => {
   const verifyAuth = useVerifyAuth();
-  const { title, open, onCreate, onCancel } = props;
-  const [form] = Form.useForm();
+  const { title, open, onCreate, onCancel, isEdit, form } = props;
 
   const handleOk = () => {
     form
       .validateFields()
-      .then((values) => {
+      .then((values: Values) => {
         verifyAuth(() => {
           onCreate(values);
           form.resetFields();
         });
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.error(err);
       });
   };
@@ -38,7 +39,12 @@ const CategoryModal: React.FC<Iprops> = (props) => {
   };
 
   return (
-    <Modal title={`添加${title}`} open={open} onOk={handleOk} onCancel={handleCancel}>
+    <Modal
+      title={`${isEdit ? '修改' : '添加'}${title}`}
+      open={open}
+      onOk={handleOk}
+      onCancel={handleCancel}
+    >
       <Form form={form}>
         <Form.Item
           label={`${title}名称`}
