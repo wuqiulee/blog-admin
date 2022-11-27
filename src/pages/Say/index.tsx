@@ -73,7 +73,7 @@ const Say: React.FC = () => {
   };
 
   // 删除说说
-  const removeSay = (id: string) => {
+  const removeSay = (id: number) => {
     verifyAuth(async () => {
       const res: any = await deleteSay({ id });
       if (res.code === 0) {

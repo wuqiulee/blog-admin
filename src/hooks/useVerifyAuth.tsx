@@ -9,7 +9,6 @@ import { VISITOR_NAME, VISITOR_TEXT } from '@/common/constants/user';
  */
 const useVerifyAuth = () => {
   const { userInfo } = useSelector((state: any) => state);
-  console.log(userInfo, 'userInfo');
   return (fn: () => void) => {
     if (
       sessionStorage.getItem('isLogin') === 'true' ||

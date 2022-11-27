@@ -47,6 +47,7 @@ const Category: React.FC = () => {
   );
 
   const onCancel = useCallback(() => {
+    setIsEdit(false);
     setIsModalOpen(false);
   }, []);
 
@@ -125,7 +126,7 @@ const Category: React.FC = () => {
         </Button>
       }
     >
-      <Table columns={columns} dataSource={dataSource} />
+      <Table columns={columns} dataSource={dataSource} bordered />
       <CategoryModal
         title="分类"
         open={isModalOpen}

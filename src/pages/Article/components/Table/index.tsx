@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Space, Table, Popconfirm, Button } from 'antd';
+import { Space, Table, Popconfirm, Button, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import moment from 'moment';
 import { TableDataType } from '@/interface/article';
-import { PublishText, PublishIcon } from '@/common/constants/article';
+import { PublishText, PublishIcon, TagBgColor } from '@/common/constants/article';
 import useVerifyAuth from '@/hooks/useVerifyAuth';
 
 interface Iprops {
@@ -35,11 +35,31 @@ const TableComp: React.FC<Iprops> = ({ dataSource, removeArticle }) => {
       title: '分类',
       dataIndex: 'category',
       key: 'category',
+      render: (categorys) => (
+        <>
+          {categorys?.split(';')?.map((category: string, index: number) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Tag key={index} color={TagBgColor[category.length - 1]} style={{ marginBottom: 5 }}>
+              {category}
+            </Tag>
+          ))}
+        </>
+      ),
     },
     {
       title: '标签',
       dataIndex: 'tag',
       key: 'tag',
+      render: (tags) => (
+        <>
+          {tags?.split(';')?.map((tag: string, index: number) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Tag key={index} color={TagBgColor[tag.length - 1]} style={{ marginBottom: 5 }}>
+              {tag}
+            </Tag>
+          ))}
+        </>
+      ),
     },
     {
       title: '发布状态',
@@ -75,6 +95,7 @@ const TableComp: React.FC<Iprops> = ({ dataSource, removeArticle }) => {
     {
       title: '操作',
       key: 'action',
+      fixed: 'right',
       render: (_, record) => (
         <Space size="middle">
           <Button type="primary" onClick={() => editArticle(record.id)}>
@@ -96,7 +117,7 @@ const TableComp: React.FC<Iprops> = ({ dataSource, removeArticle }) => {
     },
   ];
 
-  return <Table columns={columns} dataSource={dataSource} />;
+  return <Table columns={columns} dataSource={dataSource} bordered scroll={{ x: 1500 }} />;
 };
 
 export default React.memo(TableComp);

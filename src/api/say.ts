@@ -27,7 +27,7 @@ export const updateSay = async (data: UpdateshSayType) => {
 };
 
 // 删除说说
-export const deleteSay = async (data: { id: string }) => {
+export const deleteSay = async (data: { id: number }) => {
   return request({
     url: '/say/delete',
     method: 'POST',

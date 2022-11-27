@@ -13,3 +13,18 @@ export const PublishIcon: PublishTextType = {
   [PUBLISH_STATUS.PUBLISHED]: 'red',
   [PUBLISH_STATUS.RELEASED]: '#c0c0c0',
 };
+
+// tag bgcolor  by tag length
+export const TagBgColor = [
+  'magenta',
+  'red',
+  'volcano',
+  'orange',
+  'gold',
+  'lime',
+  'green',
+  'cyan',
+  'blue',
+  'geekblue',
+  'purple',
+];

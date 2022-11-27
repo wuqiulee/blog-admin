@@ -43,3 +43,14 @@ export interface PublishArticleType {
   publishStatus: number;
   id?: number;
 }
+
+export interface CreateLogType {
+  logDate: string;
+  content: string;
+}
+
+export interface UpdateLogType {
+  id: number;
+  logDate: string;
+  content: string;
+}

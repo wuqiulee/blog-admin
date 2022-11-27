@@ -45,6 +45,7 @@ const TagCmp: React.FC = () => {
   );
 
   const onCancel = useCallback(() => {
+    setIsEdit(false);
     setIsModalOpen(false);
   }, []);
 
