@@ -82,6 +82,11 @@ const Category: React.FC = () => {
       render: (text) => <a>{text}</a>,
     },
     {
+      title: '文章数量',
+      dataIndex: 'articleCount',
+      key: 'articleCount',
+    },
+    {
       title: '创建时间',
       dataIndex: 'createTime',
       key: 'creatTime',
