@@ -124,7 +124,6 @@ const CreateArticle: React.FC = () => {
             rules={[{ required: true, message: '请输入文章分类!' }]}
           >
             <Select
-              mode="multiple"
               placeholder="请选择分类"
               options={options.categoryOption}
               fieldNames={{ label: 'name', value: 'name' }}

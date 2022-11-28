@@ -35,15 +35,10 @@ const TableComp: React.FC<Iprops> = ({ dataSource, removeArticle }) => {
       title: '分类',
       dataIndex: 'category',
       key: 'category',
-      render: (categorys) => (
-        <>
-          {categorys?.split(';')?.map((category: string, index: number) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <Tag key={index} color={TagBgColor[category.length - 1]} style={{ marginBottom: 5 }}>
-              {category}
-            </Tag>
-          ))}
-        </>
+      render: (category) => (
+        <Tag color={TagBgColor[category.length - 1]} style={{ marginBottom: 5 }}>
+          {category}
+        </Tag>
       ),
     },
     {
@@ -52,7 +47,7 @@ const TableComp: React.FC<Iprops> = ({ dataSource, removeArticle }) => {
       key: 'tag',
       render: (tags) => (
         <>
-          {tags?.split(';')?.map((tag: string, index: number) => (
+          {tags?.map((tag: string, index: number) => (
             // eslint-disable-next-line react/no-array-index-key
             <Tag key={index} color={TagBgColor[tag.length - 1]} style={{ marginBottom: 5 }}>
               {tag}

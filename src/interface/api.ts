@@ -39,7 +39,7 @@ export interface PublishArticleType {
   title: string;
   content: string;
   tag: string[];
-  category: string[];
+  category: string;
   publishStatus: number;
   id?: number;
 }
