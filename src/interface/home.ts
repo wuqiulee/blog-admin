@@ -6,3 +6,8 @@ export interface TimeInfoType {
 export interface TimeMapType {
   [key: string]: TimeInfoType;
 }
+
+export interface ShowCountType {
+  articleCount: number;
+  sayCount: number;
+}
