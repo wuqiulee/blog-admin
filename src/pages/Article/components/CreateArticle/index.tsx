@@ -2,12 +2,13 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Button, Form, Input, Card, Col, Row, Select, Space, message } from 'antd';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { get } from 'loadsh';
-import Editor from 'for-editor';
+import MdEditor from 'md-editor-rt';
 import { getCategoryList } from '@/api/category';
 import { getTagList } from '@/api/tag';
 import { ArticleOptionType, PUBLISH_STATUS } from '@/interface/article';
 import { publishArticle, updateArticle, queryArticle } from '@/api/article';
 import { PublishArticleType } from '@/interface/api';
+import 'md-editor-rt/lib/style.css';
 
 interface Iprops {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ const CreateArticle: React.FC = () => {
     categoryOption: [],
     labelOption: [],
   });
-  const editorRef = useRef<any>();
+  const [text, setText] = useState<string>('');
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [form] = Form.useForm();
@@ -78,6 +79,7 @@ const CreateArticle: React.FC = () => {
     const { code, data } = res;
     if (code === 0) {
       form.setFieldsValue(data?.result[0]);
+      setText(data?.result[0].content);
     }
   };
 
@@ -145,10 +147,13 @@ const CreateArticle: React.FC = () => {
           </Form.Item>
         </FormatRow>
         <Form.Item name="content" rules={[{ required: true, message: '请撰写文章' }]}>
-          <Editor
-            // eslint-disable-next-line no-return-assign
-            ref={(el) => (editorRef.current = el)}
+          <MdEditor
+            modelValue={text}
+            previewTheme="default"
             placeholder="请撰写文章"
+            onChange={(modelValue) => {
+              setText(modelValue);
+            }}
           />
         </Form.Item>
         <Space size="middle" style={{ display: 'flex', justifyContent: 'flex-end' }}>
