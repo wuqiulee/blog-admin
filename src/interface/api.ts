@@ -54,3 +54,11 @@ export interface UpdateLogType {
   logDate: string;
   content: string;
 }
+
+export interface CreateMessageType {
+  nickName: string;
+  email: string;
+  avatar?: string;
+  content: string;
+  replyId?: number;
+}
