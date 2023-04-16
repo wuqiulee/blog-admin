@@ -7922,10 +7922,10 @@ material-colors@^1.2.1:
   resolved "https://registry.npmmirror.com/material-colors/-/material-colors-1.2.6.tgz#6d1958871126992ceecc72f4bcc4d8f010865f46"
   integrity sha512-6qE4B9deFBIa9YSpOc9O0Sgc43zTeVYbgDT5veRKSlB2+ZuHNoVVxA1L/ckMUayV9Ay9y7Z/SZCLcGteW9i7bg==
 
-md-editor-rt@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.npmmirror.com/md-editor-rt/-/md-editor-rt-2.6.0.tgz#20a6f256dc46da0d71dbf281f43c4917737eb4f0"
-  integrity sha512-7pY4vxHfp9WFbz5IlfYWAK1lJlz6Rkf9wq0cjAU3/w/F84NwUkjbDSbQ5SuzYfPZ/ZsvfFIicdnDk8JgKATIDg==
+md-editor-rt@^2.11.2:
+  version "2.11.2"
+  resolved "https://registry.npmmirror.com/md-editor-rt/-/md-editor-rt-2.11.2.tgz#f905107a4dfe053c7d90f11ba332ad78a34bfe92"
+  integrity sha512-fXhqQxf+1DpjW0avnrLG9XE1oR5zsYwCiZV/fYyh0wpQRWkoxVPZiRtAEVGROrkRcwtM1TLei1N2U+ueRJPrRg==
 
 mdn-data@2.0.14:
   version "2.0.14"

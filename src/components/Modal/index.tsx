@@ -28,7 +28,7 @@ const CategoryModal: React.FC<Iprops> = (props) => {
           form.resetFields();
         });
       })
-      .catch((err: any) => {
+      .catch((err: Error) => {
         console.error(err);
       });
   };

@@ -63,7 +63,7 @@ const Login: React.FC = () => {
     <div className={Styles.continer}>
       <div className={Styles.wrapper}>
         <h3>博客后台管理系统</h3>
-        <p>上午好，祝你开心每一天！</p>
+        <p>上午好，祝您开心每一天！</p>
         <Form onFinish={onFinish}>
           <Form.Item
             name="user"

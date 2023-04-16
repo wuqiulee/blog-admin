@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { TimeInfoType } from '@/interface/home';
@@ -7,7 +7,6 @@ import Styles from './index.module.scss';
 
 const Header: React.FC = () => {
   const { userInfo, verse } = useSelector((state: any) => state);
-  console.log(verse, 'verse');
   const timeInfo: TimeInfoType = useMemo(() => {
     const hour = moment().hours();
     return renderTimeInfo(hour);
